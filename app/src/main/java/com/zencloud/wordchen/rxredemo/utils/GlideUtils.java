@@ -17,9 +17,7 @@ import com.zencloud.wordchen.rxredemo.R;
 
 import java.io.File;
 
-/**
- * Created by ChenYJ on  2018/8/7 09:23
- */
+
 public class GlideUtils {
 	private static GlideUtils instance;
 	public static final int placeholderImage= R.color.white;

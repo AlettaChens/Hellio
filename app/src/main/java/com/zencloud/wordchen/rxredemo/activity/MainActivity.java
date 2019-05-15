@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 	 * 从网络下载数据并且存入数据库中
 	 */
 	private void sendRequestWithRxJava() {
+		DialogUtils.getInstance().loadDialog(MainActivity.this, "获取数据并且存入数据库中");
 		RequestUtils.getInstance().getCall().subscribeOn(Schedulers.io())// 切换到IO线程进行网络请求
 				.observeOn(AndroidSchedulers.mainThread())// 切换回到主线程 处理请求结果
 				.subscribe(new Observer<ArrayList<Mike>>() {
@@ -61,20 +62,19 @@ public class MainActivity extends AppCompatActivity {
 
 					@Override
 					public void onNext(ArrayList<Mike> mikes) {
-						DialogUtils.getInstance().loadDialog(MainActivity.this, "获取数据并且存入数据库中");
 						MikeDatabase.getInstance(MainActivity.this).mikeDao().insertAll(mikes);
-						DialogUtils.getInstance().loadDialogDismiss();
 						DisplayData();
 					}
 
 					@Override
 					public void onError(Throwable e) {
 						Log.e("TAG", e.toString());
-						Toast.makeText(MainActivity.this, "接口异常，请等待", Toast.LENGTH_SHORT).show();
+						Toast.makeText(MainActivity.this, "操作失败"+e.toString(), Toast.LENGTH_SHORT).show();
 					}
 
 					@Override
 					public void onComplete() {
+						DialogUtils.getInstance().loadDialogDismiss();
 						Log.e("TAG", "complet");
 					}
 				});
@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onStop() {
 		super.onStop();
-		disposable.dispose();
+		if(!disposable.isDisposed()){
+			disposable.dispose();
+		}
 	}
 }

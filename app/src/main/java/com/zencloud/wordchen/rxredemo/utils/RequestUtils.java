@@ -1,6 +1,6 @@
 package com.zencloud.wordchen.rxredemo.utils;
 
-;
+
 
 import android.util.Log;
 
