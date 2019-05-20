@@ -1,4 +1,4 @@
-RxJava2+Retrofit2+OKHttp3+ButterKnife+Room+Glide+SweetAlertDialog  Demo
+# RxJava2+Retrofit2+OKHttp3+ButterKnife+Room+Glide+SweetAlertDialog  Demo
 
 Demo是本人入门学习上述框架后做的一个简单的练习，Demo本身上比较简单，但是却确实用上了上述的框架，也算是一次实践了。
 
